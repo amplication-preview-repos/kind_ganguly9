@@ -1,0 +1,117 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Story {
+  comments   Json?
+  createdAt  DateTime  @default(now())
+  expiryTime DateTime?
+  id         String    @id @default(cuid())
+  photo      Json?
+  reactions  Json?
+  text       String?
+  updatedAt  DateTime  @updatedAt
+  video      Json?
+}
+
+model Post {
+  comments  Json?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  link      String?
+  photo     Json?
+  reactions Json?
+  text      String?
+  updatedAt DateTime @updatedAt
+  video     Json?
+}
+
+model UserProfile {
+  bio                 String?
+  coverPhoto          Json?
+  createdAt           DateTime @default(now())
+  friends             Json?
+  id                  String   @id @default(cuid())
+  personalInformation Json?
+  privacySettings     Json?
+  profilePicture      Json?
+  updatedAt           DateTime @updatedAt
+}
+
+model NewsFeed {
+  comments           Json?
+  contentSuggestions Json?
+  createdAt          DateTime @default(now())
+  friendActivities   Json?
+  id                 String   @id @default(cuid())
+  likedPosts         Json?
+  updatedAt          DateTime @updatedAt
+}
+
+model Event {
+  createdAt   DateTime  @default(now())
+  date        DateTime?
+  description String?
+  id          String    @id @default(cuid())
+  location    String?
+  reminders   Json?
+  rsvps       Json?
+  title       String?
+  updatedAt   DateTime  @updatedAt
+}
+
+model Message {
+  content      String?
+  createdAt    DateTime  @default(now())
+  id           String    @id @default(cuid())
+  readReceipts Json?
+  sender       Json?
+  timestamp    DateTime?
+  updatedAt    DateTime  @updatedAt
+}
+
+model Media {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  tags      Json?
+  typeField String?
+  updatedAt DateTime @updatedAt
+  uploader  Json?
+  url       String?
+}
+
+model MarketplaceListing {
+  createdAt      DateTime @default(now())
+  description    String?
+  id             String   @id @default(cuid())
+  images         Json?
+  paymentDetails Json?
+  price          Float?
+  seller         Json?
+  title          String?
+  updatedAt      DateTime @updatedAt
+}
+
+model Group {
+  createdAt       DateTime @default(now())
+  description     String?
+  id              String   @id @default(cuid())
+  members         Json?
+  name            String?
+  privacySettings Json?
+  updatedAt       DateTime @updatedAt
+}
+
+model Chat {
+  createdAt    DateTime @default(now())
+  id           String   @id @default(cuid())
+  lastMessage  Json?
+  messages     Json?
+  participants Json?
+  updatedAt    DateTime @updatedAt
+}
